@@ -27,8 +27,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Pipe the filtered requirements directly into pip
-        grep -v '# dev' requirements.txt | pip install -r -
+        # Use command substitution to pass the filtered list of packages to pip
+        pip install $(grep -v '# dev' requirements.txt)
 
     - name: Test with pytest
       run: |
