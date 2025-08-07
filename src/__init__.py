@@ -13,10 +13,12 @@ The main classes exposed at the package level are:
 
 from .particle import Particle, ConcreteParticle
 from .elastic_scattering import ElasticScatteringExperiment
+from .comparison import ScatteringComparison
 
 # Define the public API of the 'src' package.
 __all__ = [
     "Particle",
     "ConcreteParticle",
     "ElasticScatteringExperiment",
+    "ScatteringComparison",
 ]
