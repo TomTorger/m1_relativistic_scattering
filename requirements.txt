@@ -1,9 +1,3 @@
-# Core dependencies for testing and simulation
 numpy
 scipy
 pytest
-
-# Dependencies for the interactive Jupyter Notebook demonstration
-pandas      # dev
-matplotlib  # dev
-jupyterlab  # dev

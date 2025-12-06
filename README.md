@@ -1,79 +1,123 @@
 # A Computational Validation of the Momentum-First Kinematic Framework
 
-[![CI](https://github.com/your-username/M-First-Kinematics/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/M-First-Kinematics/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository provides a computational proof that for relativistic elastic scattering, the Momentum-First (M-First) framework's postulate of **Absolute Directional Momentum Conservation** is mathematically equivalent to the standard model's conservation of total energy and vector momentum.
+This project numerically validates that the Momentum-First (M-First) postulate of absolute directional momentum conservation matches the standard relativistic conservation of energy and vector momentum for two-particle elastic scattering. The demo prints both formulations so you can see every component balance to zero.
 
-The theoretical basis for this work is outlined in the paper ["Momentum Is All You Need"](https://www.authorea.com/users/695998/articles/713606-momentum-is-all-you-need).
-
----
-
-## The Core Claim
-
-The M-First framework redefines the fundamental conserved quantities in an interaction. Instead of conserving total vector momentum ($\vec{P}$) and total energy ($E$) as separate entities, it postulates that the six **directional momentum components** ($p_{k^\pm}$) are independently conserved for each Cartesian half-axis ($+x, -x, +y, -y, +z, -z$).
-
-The components for a single particle are defined as:
-$$
-p_{k^\pm} = M(p) \mp \frac{1}{2} p_k
-$$
-where $p_k$ is the standard momentum component along axis $k$, and $M(p) = \sqrt{p_f^2 + p^2}$ is the particle's **Core Momentum** ($p_f = m_0c$ being the **Fermic Momentum**).
-
-This repository demonstrates that for any two-particle elastic collision:
-$$
-\sum_i p_{k^\pm, \text{initial}}^{(i)} = \sum_j p_{k^\pm, \text{final}}^{(j)} \quad \iff \quad
-\begin{cases}
-\sum_i E_{\text{initial}}^{(i)} = \sum_j E_{\text{final}}^{(j)} \\
-\sum_i \vec{P}_{\text{initial}}^{(i)} = \sum_j \vec{P}_{\text{final}}^{(j)}
-\end{cases}
-$$
-
-## How It Works
-
-We simulate a two-particle collision using a numerical solver that enforces the standard conservation of energy and vector momentum. We then display the "before" and "after" states of the system in two tables:
-
-1. **The Standard Table:** Shows conservation of $E, p_x, p_y, p_z$.
-2. **The M-First Table:** Shows conservation of $p_{x^+}, p_{x^-}, p_{y^+}, p_{y^-}, p_{z^+}, p_{z^-}$.
-
-The demonstration shows that the "Balance" (Total Before - Total After) column in both tables is zero (within numerical precision), proving the equivalence of the conservation laws.
-
-## Installation
-
-To get started, clone the repository and install the required packages.
+## Run it
 
 ```bash
-git clone https://github.com/your-username/M-First-Kinematics.git
-cd M-First-Kinematics
 pip install -r requirements.txt
-```
-
-## How to Run the Demonstration
-
-You have two options to see the validation in action.
-
-### 1. The Quick Way (Command Line)
-
-For a quick demonstration of a few pre-defined scenarios, run the following command from the root directory:
-
-```bash
 python demonstrations/run_basic_demo.py
 ```
 
-This will print the conservation tables directly to your terminal.
+## Current demo scenarios
+- Head-on collision: particle A rebounds straight back from a stationary partner.
+- Glancing blow: particle A scatters 45 degrees in the x-z plane.
+- Massless particle scattering: photon-like particle deflects 90 degrees into the y-axis.
+- More scenarios coming soon.
 
-### 2. The In-Depth Way (Jupyter Notebook)
+## Demo output
+Below is the output from a fresh run of `python demonstrations/run_basic_demo.py`:
 
-For a detailed, step-by-step explanation that weaves together the theory, code, and results, we highly recommend using the Jupyter Notebook.
+```
+================================================================================
+  Running M-First Kinematics Validation Demonstrations
+================================================================================
 
-```bash
-# Launch Jupyter Notebook from the root directory
-jupyter notebook
+--- SCENARIO 1: Head-On Collision ---
+A particle (m=3) with momentum [0, 0, 4] hits a stationary particle (m=6).
+Particle A is assumed to scatter directly backward.
+
+--- Standard Conservation Table ---
+
+           A_before  B_before  Total (Before)   A_after  B_after  Total (After)  Balance
+Component
+px         0.000000  0.000000        0.000000  0.000000 0.000000       0.000000 0.000000
+py         0.000000  0.000000        0.000000  0.000000 0.000000       0.000000 0.000000
+pz         4.000000  0.000000        4.000000 -1.028571 5.028571       4.000000 0.000000
+Energy     5.000000  6.000000       11.000000  3.171429 7.828571      11.000000 0.000000
+
+================================================================================
+
+--- Momentum-First Conservation Table ---
+
+           A_before  B_before  Total (Before)  A_after   B_after  Total (After)  Balance
+Component
+x+         5.000000  6.000000       11.000000 3.171429  7.828571      11.000000 0.000000
+x-         5.000000  6.000000       11.000000 3.171429  7.828571      11.000000 0.000000
+y+         5.000000  6.000000       11.000000 3.171429  7.828571      11.000000 0.000000
+y-         5.000000  6.000000       11.000000 3.171429  7.828571      11.000000 0.000000
+z+         3.000000  6.000000        9.000000 3.685714  5.314286       9.000000 0.000000
+z-         7.000000  6.000000       13.000000 2.657143 10.342857      13.000000 0.000000
+
+================================================================================
+
+--- SCENARIO 2: Glancing Blow ---
+A particle (m=3) with momentum [0, 0, 4] hits a stationary particle (m=6).
+Particle A is assumed to scatter at 45 degrees in the x-z plane.
+
+--- Standard Conservation Table ---
+
+           A_before  B_before  Total (Before)  A_after   B_after  Total (After)   Balance
+Component
+px         0.000000  0.000000        0.000000 2.235572 -2.235572       0.000000  0.000000
+py         0.000000  0.000000        0.000000 0.000000  0.000000       0.000000  0.000000
+pz         4.000000  0.000000        4.000000 2.235572  1.764428       4.000000  0.000000
+Energy     5.000000  6.000000       11.000000 4.358390  6.641610      11.000000 -0.000000
+
+================================================================================
+
+--- Momentum-First Conservation Table ---
+
+           A_before  B_before  Total (Before)  A_after  B_after  Total (After)   Balance
+Component
+x+         5.000000  6.000000       11.000000 3.240604 7.759396      11.000000 -0.000000
+x-         5.000000  6.000000       11.000000 5.476175 5.523825      11.000000 -0.000000
+y+         5.000000  6.000000       11.000000 4.358390 6.641610      11.000000 -0.000000
+y-         5.000000  6.000000       11.000000 4.358390 6.641610      11.000000 -0.000000
+z+         3.000000  6.000000        9.000000 3.240604 5.759396       9.000000 -0.000000
+z-         7.000000  6.000000       13.000000 5.476175 7.523825      13.000000 -0.000000
+
+================================================================================
+
+--- SCENARIO 3: Massless Particle Scattering ---
+A massless particle (m=0) with momentum [0, 0, 5] hits a stationary particle (m=4).
+The massless particle is assumed to scatter at 90 degrees into the y-axis.
+
+--- Standard Conservation Table ---
+
+           A_before  B_before  Total (Before)  A_after   B_after  Total (After)   Balance
+Component
+px         0.000000  0.000000        0.000000 0.000000  0.000000       0.000000  0.000000
+py         0.000000  0.000000        0.000000 2.222222 -2.222222       0.000000  0.000000
+pz         5.000000  0.000000        5.000000 0.000000  5.000000       5.000000  0.000000
+Energy     5.000000  4.000000        9.000000 2.222222  6.777778       9.000000 -0.000000
+
+================================================================================
+
+--- Momentum-First Conservation Table ---
+
+           A_before  B_before  Total (Before)  A_after  B_after  Total (After)   Balance
+Component
+x+         5.000000  4.000000        9.000000 2.222222 6.777778       9.000000 -0.000000
+x-         5.000000  4.000000        9.000000 2.222222 6.777778       9.000000 -0.000000
+y+         5.000000  4.000000        9.000000 1.111111 7.888889       9.000000 -0.000000
+y-         5.000000  4.000000        9.000000 3.333333 5.666667       9.000000 -0.000000
+z+         2.500000  4.000000        6.500000 2.222222 4.277778       6.500000 -0.000000
+z-         7.500000  4.000000       11.500000 2.222222 9.277778      11.500000 -0.000000
+
+================================================================================
+
+All demonstrations complete.
 ```
 
-Then, navigate to and open `demonstrations/M-First_Demonstration.ipynb` in your browser.
+## Theory background
+- Full explanation of Absolute Directional Momentum and the equivalence proof lives in `docs/theory.md`.
+- The theoretical basis is outlined in the paper ["Momentum Is All You Need"](https://www.authorea.com/users/695998/articles/713606-momentum-is-all-you-need).
 
-## Running the Tests
+## Running the tests
 
-To verify the correctness of the simulation code and the implementation of the M-First postulates, you can run the full test suite using `pytest`.
-
-This will discover and run all tests in the tests/ directory. The CI workflow automatically runs these tests on every push.
+```bash
+pytest
+```
