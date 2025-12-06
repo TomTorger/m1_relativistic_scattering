@@ -1,0 +1,59 @@
+- name: Asymmetric masses, 30 deg deflection
+  description: mA=2 with p=[0,0,6] hits stationary mB=5; A exits 30 deg off +z.
+  particle_A:
+    mass: 2
+    momentum: [0, 0, 6]
+  particle_B:
+    mass: 5
+    momentum: [0, 0, 0]
+  escape_direction: [0.5, 0, 0.866025403784]
+
+- name: Both moving, oblique exit
+  description: mA=4 with p=[-1.381,-2.754,-2.901] meets mB=3 with p=[1.253,1.651,0.427]; A exits along a tilted backward ray.
+  particle_A:
+    mass: 4
+    momentum: [-1.381, -2.754, -2.901]
+  particle_B:
+    mass: 3
+    momentum: [1.253, 1.651, 0.427]
+  escape_direction: [0.547, -0.407, -0.731]
+
+- name: Light projectile, heavy target, small deflection
+  description: mA=1 with p=[0,1,5] strikes stationary mB=10; A deflects 10 deg in x-z.
+  particle_A:
+    mass: 1
+    momentum: [0, 1, 5]
+  particle_B:
+    mass: 10
+    momentum: [0, 0, 0]
+  escape_direction: [0.173648, 0.0, 0.984807]
+
+- name: Massless grazing scatter
+  description: Photon-like mA=0 with p=[1,0,6] hits stationary mB=4; A grazes in x-y.
+  particle_A:
+    mass: 0
+    momentum: [1, 0, 6]
+  particle_B:
+    mass: 4
+    momentum: [0, 0, 0]
+  escape_direction: [0.9659258, 0.2588190, 0.0]
+
+- name: Equal masses, counter-stream
+  description: mA=2 with p=[0,0,5] meets mB=2 with p=[0,0,-3]; A exits upward/right.
+  particle_A:
+    mass: 2
+    momentum: [0, 0, 5]
+  particle_B:
+    mass: 2
+    momentum: [0, 0, -3]
+  escape_direction: [0.6, 0.0, 0.8]
+
+- name: Transverse deflection in y
+  description: mA=3 with p=[0,2,5] hits stationary mB=6; A bends toward +y.
+  particle_A:
+    mass: 3
+    momentum: [0, 2, 5]
+  particle_B:
+    mass: 6
+    momentum: [0, 0, 0]
+  escape_direction: [0.0, 0.89442719, 0.4472136]

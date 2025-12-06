@@ -1,10 +1,9 @@
 """
-Run the core set of elastic scattering demonstrations defined in YAML.
+Run the extended set of elastic scattering demonstrations defined in YAML.
 
-Scenarios are declared in demonstrations/basic_scenarios.yaml for readability.
-Each scenario describes the incoming particles and the escape direction; the
-script validates and prints both the standard and Momentum-First conservation
-tables for each.
+Scenarios are declared in demonstrations/extended_scenarios.yaml. Each scenario
+describes incoming particles and an escape direction; the script prints both
+standard and Momentum-First conservation tables for each physical solution.
 """
 
 import os
@@ -54,16 +53,16 @@ def run_scenario(index: int, scenario: dict) -> None:
 
 
 def main():
-    scenarios = load_scenarios("basic_scenarios.yaml")
+    scenarios = load_scenarios("extended_scenarios.yaml")
 
     print("=" * 80)
-    print("  Running M-First Kinematics Validation Demonstrations")
+    print("  Running Extended M-First Kinematics Demonstrations")
     print("=" * 80 + "\n")
 
     for idx, scenario in enumerate(scenarios, start=1):
         run_scenario(idx, scenario)
 
-    print("All demonstrations complete.")
+    print("Extended demonstrations complete.")
 
 
 if __name__ == "__main__":

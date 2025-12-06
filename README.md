@@ -9,13 +9,17 @@ This project numerically validates that the Momentum-First (M-First) postulate o
 ```bash
 pip install -r requirements.txt
 python demonstrations/run_basic_demo.py
+# Extended sweep
+python demonstrations/run_extended_demo.py
 ```
+Scenarios are declared in YAML for easy editing: `demonstrations/basic_scenarios.yaml` and `demonstrations/extended_scenarios.yaml`.
 
 ## Current demo scenarios
 - Head-on collision: particle A rebounds straight back from a stationary partner.
 - Glancing blow: particle A scatters 45 degrees in the x-z plane.
 - Massless particle scattering: photon-like particle deflects 90 degrees into the y-axis.
-- More scenarios coming soon.
+
+For a broader sweep (moving targets, massless grazing, heavy-light mixes), run `python demonstrations/run_extended_demo.py`.
 
 ## Demo output
 Below is the output from a fresh run of `python demonstrations/run_basic_demo.py`:
