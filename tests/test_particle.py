@@ -65,7 +65,7 @@ def test_directional_components_calculation(m0, p_vec):
     Validates the calculation of the six directional momentum components.
 
     This is the most critical test for the M-First implementation, as it
-    directly checks the formula: p_{k^±} = M(p) ∓ (1/2) * p_k
+    directly checks the formula: p_{k^±} = M(p) ± (1/2) * p_k
     """
     p_vec = np.array(p_vec)
     particle = ConcreteParticle(m0=m0, bosic_momentum=p_vec, c=1.0)
@@ -75,12 +75,12 @@ def test_directional_components_calculation(m0, p_vec):
     px, py, pz = p_vec[0], p_vec[1], p_vec[2]
 
     expected = {
-        'x+': M - px / 2.0,
-        'x-': M + px / 2.0,
-        'y+': M - py / 2.0,
-        'y-': M + py / 2.0,
-        'z+': M - pz / 2.0,
-        'z-': M + pz / 2.0,
+        'x+': M + px / 2.0,
+        'x-': M - px / 2.0,
+        'y+': M + py / 2.0,
+        'y-': M - py / 2.0,
+        'z+': M + pz / 2.0,
+        'z-': M - pz / 2.0,
     }
 
     # Get the calculated components from the particle

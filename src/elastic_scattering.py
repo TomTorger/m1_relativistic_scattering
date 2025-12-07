@@ -158,8 +158,8 @@ class ElasticScatteringExperiment:
             total_after = val_A_after + val_B_after
             
             row.update({
-                "A_before": val_A_before, "B_before": val_B_before, "Total (Before)": total_before,
-                "A_after": val_A_after, "B_after": val_B_after, "Total (After)": total_after,
+                "A_before": val_A_before, "B_before": val_B_before, "Total_before": total_before,
+                "A_after": val_A_after, "B_after": val_B_after, "Total_after": total_after,
                 "Balance": total_before - total_after
             })
             data.append(row)
@@ -204,18 +204,28 @@ class ElasticScatteringExperiment:
             total_after = val_A_after + val_B_after
 
             row.update({
-                "A_before": val_A_before, "B_before": val_B_before, "Total (Before)": total_before,
-                "A_after": val_A_after, "B_after": val_B_after, "Total (After)": total_after,
+                "A_before": val_A_before, "B_before": val_B_before, "Total_before": total_before,
+                "A_after": val_A_after, "B_after": val_B_after, "Total_after": total_after,
                 "Balance": total_before - total_after
             })
             data.append(row)
-            
+
         self._last_mfirst_data = data  # Store the data before creating the DataFrame
         df = pd.DataFrame(data).set_index("Component")
+        # Add vector totals as extra columns (populate on + rows only for readability)
+        df["Net_Before"] = np.nan
+        df["Net_After"] = np.nan
+        for axis in ["x", "y", "z"]:
+            plus = f"{axis}+"
+            minus = f"{axis}-"
+            vec_before = (states["A_before"][plus] - states["A_before"][minus]) + (states["B_before"][plus] - states["B_before"][minus])
+            vec_after = (states["A_after"][plus] - states["A_after"][minus]) + (states["B_after"][plus] - states["B_after"][minus])
+            df.loc[plus, "Net_Before"] = vec_before
+            df.loc[plus, "Net_After"] = vec_after
         print("--- Momentum-First Conservation Table ---\n")
         # Re-order for intuitive display
         df = df.reindex(['x+', 'x-', 'y+', 'y-', 'z+', 'z-'])
-        print(df.to_string(float_format="%.6f"))
+        print(df.to_string(float_format="%.6f", na_rep=""))
         print("\n" + "="*80 + "\n")
 
     def __repr__(self) -> str:

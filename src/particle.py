@@ -101,12 +101,12 @@ class Particle:
         half_p = self.bosic_momentum / 2.0
         
         return {
-            'x+': M - half_p[0],
-            'x-': M + half_p[0],
-            'y+': M - half_p[1],
-            'y-': M + half_p[1],
-            'z+': M - half_p[2],
-            'z-': M + half_p[2],
+            'x+': M + half_p[0],
+            'x-': M - half_p[0],
+            'y+': M + half_p[1],
+            'y-': M - half_p[1],
+            'z+': M + half_p[2],
+            'z-': M - half_p[2],
         }
 
     @property

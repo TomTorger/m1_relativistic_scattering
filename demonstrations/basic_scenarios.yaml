@@ -1,29 +1,31 @@
-- name: Head-On Collision
+- name: Head-On Collision #Title of the scenario
   description: mA=3 with p=[0,0,4] hits stationary mB=6; A scatters straight back.
   particle_A:
+    # Particle A properties - mass and momentum
     mass: 3
-    momentum: [0, 0, 4]
+    momentum: [ 0, 0, 4 ]
   particle_B:
+    # Particle B properties - mass and momentum
     mass: 6
-    momentum: [0, 0, 0]
-  escape_direction: [0, 0, -1]
+    momentum: [ 0, 0, 0 ]
+  escape_direction: [ 0, 0, -1 ] # Direction of particle A after collision
 
 - name: Glancing Blow
   description: mA=3 with p=[0,0,4] hits stationary mB=6; A scatters 45 deg in x-z.
   particle_A:
     mass: 3
-    momentum: [0, 0, 4]
+    momentum: [ 0, 0, 4 ]
   particle_B:
     mass: 6
-    momentum: [0, 0, 0]
-  escape_direction: [0.70710678, 0, 0.70710678]
+    momentum: [ 0, 0, 0 ]
+  escape_direction: [ 0.70710678, 0, 0.70710678 ]
 
 - name: Massless Particle Scattering
   description: mA=0 with p=[0,0,5] hits stationary mB=4; A scatters 90 deg into +y.
   particle_A:
     mass: 0
-    momentum: [0, 0, 5]
+    momentum: [ 0, 0, 5 ]
   particle_B:
     mass: 4
-    momentum: [0, 0, 0]
-  escape_direction: [0, 1, 0]
+    momentum: [ 0, 0, 0 ]
+  escape_direction: [ 0, 1, 0 ]
